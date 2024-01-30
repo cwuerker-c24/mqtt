@@ -12,14 +12,14 @@ class MessageHandler extends MqttMessageHandler
 {
 	public function publish( MqttClient $mqtt, MqttPublishMessage $publishObject ): void
 	{
-		print(server . phpvsprintf("%s (ID:%d QoS:%d Dup:%s Topic:%s) \e[32m%s\e[0m", [
+		print( vsprintf( "%s (ID:%d QoS:%d Dup:%s Topic:%s) \e[32m%s\e[0m", [
 				date('Y-m-d H:i:s'),
 				$publishObject->getMsgID(),
 				$publishObject->getQoS(),
 				$publishObject->getDup() ? 'Y' : 'N',
 				$publishObject->getTopic(),
 				$publishObject->getMessage()
-			]) . PHP_EOL);
+			] ) . PHP_EOL);
 	}
 }
 

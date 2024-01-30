@@ -2,6 +2,22 @@
 
 ## General
 
+
+### Specification
+https://mqtt.org/mqtt-specification/
+
+- v3.1: ~60 Seiten
+- v5: ~130 Sseiten
+
+### Software
+https://mqtt.org/software/
+
+- viele Broker
+- viele Clients
+- User Interfaces
+  - MQTT Explorer
+  - MQTTAnalyzer (iOS / MacOS)
+
 ## Demo 1
 
 ## Demo 2
