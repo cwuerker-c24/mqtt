@@ -1,0 +1,16 @@
+#!/usr/bin/php
+<?php
+
+use cwc24\mqtt\Demo2\Worker\Daemon as WorkerDaemon;
+
+chdir( __DIR__ );
+(@include_once '../../vendor/autoload.php') or die('Please install using composer, first!');
+
+try{
+	$app	= new WorkerDaemon();
+	$app->run();
+}
+catch( Exception $e ){
+	print( 'Exception: '.$e->getMessage().'.'.PHP_EOL );
+	print( 'Trace: '.PHP_EOL.$e->getTraceAsString().'.'.PHP_EOL.PHP_EOL );
+}

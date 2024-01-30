@@ -1,0 +1,20 @@
+
+[Unit]
+Description=Focus Demo Service Scheduler
+
+[Service]
+ExecStart=/usr/bin/php daemon --verbose
+Environment=APPLICATION_ENV=:ENV
+Environment=APPLICATION_TYPE="server"
+Environment=APPLICATION_PROVIDER="systemd"
+KillSignal=SIGQUIT
+Restart=always
+TimeoutStopSec=90
+User=:USER
+Group=:GROUP
+WorkingDirectory=:PWD
+
+[Install]
+WantedBy=multi-user.target
+
+

@@ -1,0 +1,22 @@
+
+[Unit]
+Description=Focus Demo Service Worker %i
+PartOf=Focus.service
+After=Focus.service
+
+[Service]
+#ExecStart=/usr/bin/php daemon.worker :NR --verbose
+ExecStart=/usr/bin/php daemon.worker %i
+Environment=APPLICATION_ENV=:ENV
+Environment=APPLICATION_TYPE="worker"
+Environment=APPLICATION_PROVIDER="systemd"
+KillSignal=SIGQUIT
+Restart=always
+TimeoutStopSec=90
+User=:USER
+Group=:GROUP
+WorkingDirectory=:PWD
+
+[Install]
+#WantedBy=multi-user.target
+WantedBy=Focus.service

@@ -1,0 +1,21 @@
+{
+    "name": "kriss/mqtt",
+    "require": {
+        "sskaje/mqtt": "dev-master"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "2.0.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "cwc24\\mqtt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kriss0r",
+            "email": "kriss@ceusmedia.de"
+        }
+    ],
+    "minimum-stability": "dev"
+}
