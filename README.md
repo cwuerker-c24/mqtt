@@ -81,7 +81,7 @@ brew install box
 
 - Doc Configuration: https://github.com/box-project/box/blob/main/doc/configuration.md#configuration
 
-Versuch
+Bauen das Archivs in dieser Version mit `compile`:
 ````
 ./box-4.5.1.phar compile -vvv
 ````
@@ -98,9 +98,15 @@ scheitert an Prüfung der Composer Version :(
 curl -LSs https://box-project.github.io/box2/installer.php | php
 ````
 ### Usage
+
+Bauen das Archivs in dieser Version mit `build`:
 ````
 ./box-2.7.5.phar build -v && chmod +x client.phar
 ````
-
 Dann sendet `client.phar MyTestMessage_1` eine Nachricht in das MQTT Topic `test`.
+
+Archive können entpackt werden:
+````
+./box-2.7.5.phar extract client.phar
+````
 
