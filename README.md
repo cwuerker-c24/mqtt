@@ -10,7 +10,7 @@
 
 Phar Archive bauen ist nicht sooo simple, da einiges zu tun ist.
 
-Beispiel: Composer
+###  Beispiel: Composer
 Mit Box kann man die composer.phar aus den Sourcen bauen.
 In der dazu nötigen Configuration ist zu sehen, was alles gemacht werden muss:
 https://github.com/box-project/box2/wiki/Composer
@@ -20,12 +20,12 @@ Mit `finder` werden andere Ordner gefiltert (Name Pattern, Exclude) hinzugefügt
 Mit `files` werden einzelne Dateien hinzugefügt.
 
 
-Beispiel: Manuell
+### Beispiel: Manuell
 https://github.com/CeusMedia/Hymn/blob/1.0.x/build/create.php
 
 ````
-$rootPath		= dirname( __DIR__ );
-
+$rootPath	= dirname( __DIR__ );
+$pathsToAdd	= ['locales', 'templates'];
 $pharFlags	= FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_FILENAME;
 
 $archive	= new Phar( $rootPath.'/target.phar', $pharFlags, 'target.phar' );
@@ -34,17 +34,14 @@ $archive->setStub( file_get_contents( __DIR__.'/'.'stub.php' ) );
 $archive->buildFromDirectory( $rootPath.'/build/classes/', '$(.*)\.php$' );
 $archive->addFromString( 'main.php, file_get_contents( __DIR__.'/main.php' ) );
 
-$pathsToAdd		= ['locales', 'templates'];
 foreach( $pathsToAdd as $pathToAdd ){
-	$directory	= new RecursiveDirectoryIterator( $rootPath.$pathToAdd, RecursiveDirectoryIterator::SKIP_DOTS );
-	$iterator	= new RecursiveIteratorIterator( $directory, RecursiveIteratorIterator::CHILD_FIRST );
-	$pattern	= '/^'.preg_quote( $rootPath, '/' ).'/';
-	foreach( $iterator as $entry ){
-		if( !$entry->isDir() ){
-			item	= preg_replace( $pattern, '', $entry->getPathname() );
-			$archive->addFile( $rootPath.$item, $item );
-		}
-	}
+	$iterator = new RecursiveIteratorIterator(
+		new RecursiveDirectoryIterator( $rootPath.$pathToAdd, RecursiveDirectoryIterator::SKIP_DOTS ),
+		RecursiveIteratorIterator::CHILD_FIRST
+	);
+	foreach( $iterator as $entry )
+		if( !$entry->isDir() )
+			$archive->addFile( $entry->getPathname() );
 }
 
 $archive->compressFiles( Phar::GZ );
